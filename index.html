@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="ur" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Unicode2InPage - Urdu Unicode Tool</title>
+
+<meta name="description" content="Unicode2InPage Urdu Unicode text writing, copying and font preview tool.">
+  <meta name="keywords" content="Urdu Unicode, InPage, Jameel Noori Nastaleeq, Urdu converter">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>
+    * {
+      box-sizing: border-box;
+    }
+
+body {
+      margin: 0;
+      background: #f1f5f9;
+      color: #172033;
+      font-family: Arial, sans-serif;
+    }
+
+.topbar {
+      background: linear-gradient(135deg, #064e3b, #047857);
+      color: white;
+      text-align: center;
+      padding: 28px 15px;
+    }
+
+.topbar h1 {
+      margin: 0;
+      font-size: 35px;
+    }
+
+.topbar p {
+      margin: 10px 0 0;
+      font-size: 18px;
+    }
+
+.container {
+      width: min(1000px, 94%);
+      margin: 30px auto;
+    }
+
+.card {
+      background: white;
+      border-radius: 18px;
+      padding: 24px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+    }
+
+label {
+      display: block;
+      font-size: 22px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+textarea {
+      width: 100%;
+      min-height: 230px;
+      resize: vertical;
+      border: 2px solid #cbd5e1;
+      border-radius: 12px;
+      padding: 18px;
+      font-size: 25px;
+      line-height: 2.3;
+      outline: none;
+      font-family: "Noto Nastaliq Urdu", serif;
+    }
+
+textarea:focus {
+      border-color: #059669;
+    }
+
+.buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+button {
+      border: none;
+      border-radius: 10px;
+      padding: 13px 20px;
+      color: white;
+      background: #047857;
+      cursor: pointer;
+      font-size: 17px;
+      font-weight: bold;
+    }
+
+button:hover {
+      background: #065f46;
+    }
+
+.danger {
+      background: #dc2626;
+    }
+
+.danger:hover {
+      background: #b91c1c;
+    }
+
+.info {
+      margin-top: 25px;
+      padding: 18px;
+      border-right: 5px solid #059669;
+      background: #ecfdf5;
+      border-radius: 10px;
+      font-size: 18px;
+      line-height: 2;
+    }
+
+footer {
+      text-align: center;
+      color: #64748b;
+      padding: 20px;
+      font-size: 16px;
+    }
+
+@media (max-width: 600px) {
+      .topbar h1 {
+        font-size: 28px;
+      }
+
+.card {
+        padding: 16px;
+      }
+
+textarea {
+        font-size: 22px;
+      }
+
+button {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header class="topbar">
+    <h1>Unicode2InPage</h1>
+    <p>Urdu Unicode Text Writing & Copy Tool</p>
+  </header>
+
+<main class="container">
+    <section class="card">
+      <label for="urduText">اپنا اردو متن یہاں لکھیں یا پیسٹ کریں</label>
+
+<textarea id="urduText" placeholder="یہاں اپنا اردو متن لکھیں۔۔۔"></textarea>
+
+<div class="buttons">
+        <button onclick="copyText()">متن کاپی کریں</button>
+        <button onclick="downloadText()">متن ڈاؤن لوڈ کریں</button>
+        <button class="danger" onclick="clearText()">متن صاف کریں</button>
+      </div>
+
+<div class="info">
+        <strong>اہم بات:</strong>
+        یہ پہلا ورژن اردو Unicode متن لکھنے، دیکھنے، کاپی کرنے اور ڈاؤن لوڈ کرنے کے لیے ہے۔
+        اگلے مرحلے میں ہم اصل Unicode to InPage conversion شامل کریں گے۔
+      </div>
+    </section>
+  </main>
+
+<footer>
+    © 2026 Unicode2InPage - Free Urdu Unicode Tool
+  </footer>
+
+<script>
+    function copyText() {
+      const text = document.getElementById("urduText").value;
+
+if (text.trim() === "") {
+        alert("براہ کرم پہلے اردو متن لکھیں۔");
+        return;
+      }
+
+navigator.clipboard.writeText(text)
+        .then(() => {
+          alert("متن کامیابی سے کاپی ہو گیا ہے۔");
+        })
+        .catch(() => {
+          alert("متن کاپی نہیں ہو سکا۔");
+        });
+    }
+
+function clearText() {
+      document.getElementById("urduText").value = "";
+    }
+
+function downloadText() {
+      const text = document.getElementById("urduText").value;
+
+if (text.trim() === "") {
+        alert("براہ کرم پہلے اردو متن لکھیں۔");
+        return;
+      }
+
+const file = new Blob([text], {
+        type: "text/plain;charset=utf-8"
+      });
+
+const link = document.createElement("a");
+      link.href = URL.createObjectURL(file);
+      link.download = "urdu-text.txt";
+      link.click();
+
+URL.revokeObjectURL(link.href);
+    }
+  </script>
+
+</body>
+</html>
