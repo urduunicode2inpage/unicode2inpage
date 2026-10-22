@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Unicode2InPage - Urdu Unicode Tool</title>
+
+<title>Unicode2InPage - Urdu Unicode Tool</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -92,6 +93,14 @@ textarea:focus {
       word-wrap: break-word;
     }
 
+#inpageOutput {
+      direction: ltr;
+      text-align: left;
+      font-family: Arial, sans-serif;
+      font-size: 18px;
+      line-height: 1.6;
+    }
+
 .buttons {
       display: flex;
       flex-wrap: wrap;
@@ -119,6 +128,10 @@ button:hover {
 
 .clear {
       background: #dc3545;
+    }
+
+.convert {
+      background: #7c3aed;
     }
 
 .note {
@@ -158,16 +171,21 @@ button {
 </head>
 
 <body>
-  <header>
+
+<header>
     <h1>Unicode2InPage</h1>
-    <p>Urdu Unicode Writing aur Nastaleeq Preview Tool</p>
+    <p>Urdu Unicode Writing aur InPage Converter</p>
   </header>
 
 <main>
-    <section class="card">
+
+<section class="card">
       <label for="urduText">Urdu Unicode Text Likhein</label>
 
-<textarea id="urduText" placeholder="Yahan Urdu text likhein ya paste karein..."></textarea>
+<textarea
+        id="urduText"
+        placeholder="Yahan Urdu text likhein ya paste karein..."
+      ></textarea>
 
 <div class="buttons">
         <button onclick="copyText()">Copy</button>
@@ -185,14 +203,45 @@ button {
     </section>
 
 <section class="card">
-      <h2>Unicode2InPage ke bare mein</h2>
-      <p class="note">
-        Yeh tool Urdu Unicode text likhne, copy karne, download karne aur
-        Nastaleeq style mein preview dekhne ke liye banaya gaya hai.
-        InPage ke purane format mein conversion aglay marhalay mein add ki jayegi.
+      <label for="inpageOutput">Unicode se InPage Text</label>
+
+<textarea
+        id="inpageOutput"
+        readonly
+        placeholder="Convert karne ke baad InPage text yahan nazar aayega..."
+      ></textarea>
+
+<div class="buttons">
+        <button class="convert" onclick="convertToInPage()">
+          Convert to InPage
+        </button>
+
+<button onclick="copyInPageText()">
+          Copy InPage Text
+        </button>
+
+<button class="download" onclick="downloadInPageText()">
+          Download InPage Text
+        </button>
+      </div>
+
+<p class="note">
+        Note: Yeh pehla beta version hai. Converted text ko InPage software mein
+        paste karke zaroor check karein.
       </p>
     </section>
-  </main>
+
+<section class="card">
+      <h2>Unicode2InPage ke bare mein</h2>
+
+<p class="note">
+        Yeh tool Urdu Unicode text likhne, copy karne, download karne,
+        Nastaleeq preview dekhne aur InPage conversion test karne ke liye banaya
+        gaya hai.
+      </p>
+    </section>
+
+</main>
 
 <footer>
     © 2026 Unicode2InPage
@@ -201,9 +250,11 @@ button {
 <script>
     const urduText = document.getElementById("urduText");
     const preview = document.getElementById("preview");
+    const inpageOutput = document.getElementById("inpageOutput");
 
 urduText.addEventListener("input", function () {
-      preview.textContent = urduText.value || "Aap ka Urdu text yahan nazar aayega...";
+      preview.textContent =
+        urduText.value || "Aap ka Urdu text yahan nazar aayega...";
     });
 
 function copyText() {
@@ -231,13 +282,120 @@ const link = document.createElement("a");
       link.href = URL.createObjectURL(blob);
       link.download = "urdu-text.txt";
       link.click();
-      URL.revokeObjectURL(link.href);
+
+URL.revokeObjectURL(link.href);
     }
 
 function clearText() {
       urduText.value = "";
+      inpageOutput.value = "";
       preview.textContent = "Aap ka Urdu text yahan nazar aayega...";
     }
+
+/*
+      Basic Urdu Unicode to InPage mapping.
+      Yeh beta testing ke liye hai.
+    */
+    const unicodeToInPageMap = {
+      "ا": "\u0004\u0081",
+      "ب": "\u0004\u201A",
+      "پ": "\u0004\u0192",
+      "ت": "\u0004\u201E",
+      "ٹ": "\u0004\u2020",
+      "ث": "\u0004\u2021",
+      "ج": "\u0004\u2021",
+      "چ": "\u0004\u02C6",
+      "ح": "\u0004\u2030",
+      "خ": "\u0004\u0160",
+      "د": "\u0004\u2039",
+      "ڈ": "\u0004\u0152",
+      "ذ": "\u0004\u008D",
+      "ر": "\u0004\u017D",
+      "ڑ": "\u0004\u008F",
+      "ز": "\u0004\u0090",
+      "ژ": "\u0004\u2018",
+      "س": "\u0004\u2019",
+      "ش": "\u0004\u201C",
+      "ص": "\u0004\u201D",
+      "ض": "\u0004\u2022",
+      "ط": "\u0004\u2013",
+      "ظ": "\u0004\u2020",
+      "ع": "\u0004\u02DC",
+      "غ": "\u0004\u2122",
+      "ف": "\u0004\u0161",
+      "ق": "\u0004\u203A",
+      "ک": "\u0004\u0153",
+      "گ": "\u0004\u009D",
+      "ل": "\u0004\u017E",
+      "م": "\u0004\u0178",
+      "ن": "\u0004\u00A0",
+      "ں": "\u0004\u00A1",
+      "و": "\u0004\u00A2",
+      "ہ": "\u0004\u00A7",
+      "ھ": "\u0004\u00A7",
+      "ء": "\u0004\u00A3",
+      "ی": "\u0004\u00A4",
+      "ے": "\u0004\u00A5",
+      "ئ": "\u0004\u00BF",
+      "ؤ": "\u0004\u00A2",
+      "آ": "\u0004\u0081\u0004\u00B3",
+      "أ": "\u0004\u0081\u0004\u00BF",
+      "،": "\u0004\u00ED",
+      "۔": "\u0004\u00F3",
+      "؛": "\u0004\u00EA",
+      " ": " ",
+      "\n": "\n"
+    };
+
+function convertToInPage() {
+      if (!urduText.value.trim()) {
+        alert("Pehle Urdu text likhein.");
+        return;
+      }
+
+let convertedText = "";
+
+for (const character of urduText.value) {
+        if (unicodeToInPageMap[character] !== undefined) {
+          convertedText += unicodeToInPageMap[character];
+        } else {
+          convertedText += character;
+        }
+      }
+
+inpageOutput.value = convertedText;
+      alert("Conversion ho gayi. Ab output copy karke InPage mein paste karein.");
+    }
+
+function copyInPageText() {
+      if (!inpageOutput.value) {
+        alert("Pehle Convert to InPage button dabayein.");
+        return;
+      }
+
+navigator.clipboard.writeText(inpageOutput.value)
+        .then(() => alert("InPage text copy ho gaya."))
+        .catch(() => alert("Text copy nahi ho saka."));
+    }
+
+function downloadInPageText() {
+      if (!inpageOutput.value) {
+        alert("Pehle Convert to InPage button dabayein.");
+        return;
+      }
+
+const blob = new Blob([inpageOutput.value], {
+        type: "text/plain"
+      });
+
+const link = document.createElement("a");
+      link.href = URL.createObjectURL(blob);
+      link.download = "inpage-text.txt";
+      link.click();
+
+URL.revokeObjectURL(link.href);
+    }
   </script>
+
 </body>
 </html>
