@@ -3,16 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Unicode2InPage - Urdu Unicode Tool</title>
-
-<meta name="description" content="Unicode2InPage Urdu Unicode text writing, copying and font preview tool.">
-  <meta name="keywords" content="Urdu Unicode, InPage, Jameel Noori Nastaleeq, Urdu converter">
+  <title>Unicode2InPage - Urdu Unicode Tool</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-<link href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;700&display=swap" rel="stylesheet">
 
 <style>
     * {
@@ -21,121 +16,137 @@
 
 body {
       margin: 0;
-      background: #f1f5f9;
-      color: #172033;
+      background: #f3f6fa;
+      color: #17202a;
       font-family: Arial, sans-serif;
     }
 
-.topbar {
-      background: linear-gradient(135deg, #064e3b, #047857);
+header {
+      background: #123c69;
       color: white;
       text-align: center;
-      padding: 28px 15px;
+      padding: 24px 15px;
     }
 
-.topbar h1 {
+header h1 {
+      margin: 0 0 8px;
+      font-size: 30px;
+    }
+
+header p {
       margin: 0;
-      font-size: 35px;
+      font-size: 16px;
     }
 
-.topbar p {
-      margin: 10px 0 0;
-      font-size: 18px;
-    }
-
-.container {
-      width: min(1000px, 94%);
-      margin: 30px auto;
+main {
+      width: min(950px, 94%);
+      margin: 28px auto;
     }
 
 .card {
       background: white;
-      border-radius: 18px;
-      padding: 24px;
-      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+      border-radius: 14px;
+      padding: 22px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
     }
 
 label {
       display: block;
-      font-size: 22px;
       font-weight: bold;
       margin-bottom: 10px;
+      font-size: 18px;
     }
 
 textarea {
       width: 100%;
-      min-height: 230px;
+      min-height: 180px;
       resize: vertical;
-      border: 2px solid #cbd5e1;
-      border-radius: 12px;
-      padding: 18px;
-      font-size: 25px;
-      line-height: 2.3;
+      border: 1px solid #b8c4d1;
+      border-radius: 9px;
+      padding: 15px;
+      font-size: 21px;
+      line-height: 2.2;
+      direction: rtl;
+      text-align: right;
       outline: none;
-      font-family: "Noto Nastaliq Urdu", serif;
     }
 
 textarea:focus {
-      border-color: #059669;
+      border-color: #1677d2;
+      box-shadow: 0 0 0 3px rgba(22, 119, 210, 0.12);
+    }
+
+.preview {
+      min-height: 180px;
+      padding: 15px;
+      border: 1px solid #b8c4d1;
+      border-radius: 9px;
+      background: #fffdf5;
+      font-family: "Noto Nastaliq Urdu", serif;
+      font-size: 25px;
+      line-height: 2.3;
+      direction: rtl;
+      text-align: right;
+      white-space: pre-wrap;
+      word-wrap: break-word;
     }
 
 .buttons {
       display: flex;
       flex-wrap: wrap;
-      gap: 12px;
-      margin-top: 18px;
+      gap: 10px;
+      margin-top: 15px;
     }
 
 button {
-      border: none;
-      border-radius: 10px;
-      padding: 13px 20px;
+      border: 0;
+      border-radius: 8px;
+      padding: 12px 20px;
       color: white;
-      background: #047857;
+      background: #1677d2;
       cursor: pointer;
-      font-size: 17px;
-      font-weight: bold;
+      font-size: 16px;
     }
 
 button:hover {
-      background: #065f46;
+      opacity: 0.9;
     }
 
-.danger {
-      background: #dc2626;
+.download {
+      background: #198754;
     }
 
-.danger:hover {
-      background: #b91c1c;
+.clear {
+      background: #dc3545;
     }
 
-.info {
-      margin-top: 25px;
-      padding: 18px;
-      border-right: 5px solid #059669;
-      background: #ecfdf5;
-      border-radius: 10px;
-      font-size: 18px;
-      line-height: 2;
+.note {
+      color: #59636e;
+      line-height: 1.8;
+      margin-bottom: 0;
     }
 
 footer {
       text-align: center;
-      color: #64748b;
-      padding: 20px;
-      font-size: 16px;
+      color: #66717d;
+      padding: 10px 15px 30px;
     }
 
 @media (max-width: 600px) {
-      .topbar h1 {
-        font-size: 28px;
+      header h1 {
+        font-size: 24px;
       }
 
 .card {
-        padding: 16px;
+        padding: 15px;
       }
 
 textarea {
+        font-size: 18px;
+      }
+
+.preview {
         font-size: 22px;
       }
 
@@ -147,78 +158,86 @@ button {
 </head>
 
 <body>
-
-<header class="topbar">
+  <header>
     <h1>Unicode2InPage</h1>
-    <p>Urdu Unicode Text Writing & Copy Tool</p>
+    <p>Urdu Unicode Writing aur Nastaleeq Preview Tool</p>
   </header>
 
-<main class="container">
+<main>
     <section class="card">
-      <label for="urduText">اپنا اردو متن یہاں لکھیں یا پیسٹ کریں</label>
+      <label for="urduText">Urdu Unicode Text Likhein</label>
 
-<textarea id="urduText" placeholder="یہاں اپنا اردو متن لکھیں۔۔۔"></textarea>
+<textarea id="urduText" placeholder="Yahan Urdu text likhein ya paste karein..."></textarea>
 
 <div class="buttons">
-        <button onclick="copyText()">متن کاپی کریں</button>
-        <button onclick="downloadText()">متن ڈاؤن لوڈ کریں</button>
-        <button class="danger" onclick="clearText()">متن صاف کریں</button>
+        <button onclick="copyText()">Copy</button>
+        <button class="download" onclick="downloadText()">Download</button>
+        <button class="clear" onclick="clearText()">Clear</button>
       </div>
+    </section>
 
-<div class="info">
-        <strong>اہم بات:</strong>
-        یہ پہلا ورژن اردو Unicode متن لکھنے، دیکھنے، کاپی کرنے اور ڈاؤن لوڈ کرنے کے لیے ہے۔
-        اگلے مرحلے میں ہم اصل Unicode to InPage conversion شامل کریں گے۔
+<section class="card">
+      <label>Jameel/Nastaleeq Style Preview</label>
+
+<div id="preview" class="preview">
+        Aap ka Urdu text yahan nazar aayega...
       </div>
+    </section>
+
+<section class="card">
+      <h2>Unicode2InPage ke bare mein</h2>
+      <p class="note">
+        Yeh tool Urdu Unicode text likhne, copy karne, download karne aur
+        Nastaleeq style mein preview dekhne ke liye banaya gaya hai.
+        InPage ke purane format mein conversion aglay marhalay mein add ki jayegi.
+      </p>
     </section>
   </main>
 
 <footer>
-    © 2026 Unicode2InPage - Free Urdu Unicode Tool
+    © 2026 Unicode2InPage
   </footer>
 
 <script>
-    function copyText() {
-      const text = document.getElementById("urduText").value;
+    const urduText = document.getElementById("urduText");
+    const preview = document.getElementById("preview");
 
-if (text.trim() === "") {
-        alert("براہ کرم پہلے اردو متن لکھیں۔");
+urduText.addEventListener("input", function () {
+      preview.textContent = urduText.value || "Aap ka Urdu text yahan nazar aayega...";
+    });
+
+function copyText() {
+      if (!urduText.value.trim()) {
+        alert("Pehle Urdu text likhein.");
         return;
       }
 
-navigator.clipboard.writeText(text)
-        .then(() => {
-          alert("متن کامیابی سے کاپی ہو گیا ہے۔");
-        })
-        .catch(() => {
-          alert("متن کاپی نہیں ہو سکا۔");
-        });
-    }
-
-function clearText() {
-      document.getElementById("urduText").value = "";
+navigator.clipboard.writeText(urduText.value)
+        .then(() => alert("Text copy ho gaya."))
+        .catch(() => alert("Text copy nahi ho saka."));
     }
 
 function downloadText() {
-      const text = document.getElementById("urduText").value;
-
-if (text.trim() === "") {
-        alert("براہ کرم پہلے اردو متن لکھیں۔");
+      if (!urduText.value.trim()) {
+        alert("Pehle Urdu text likhein.");
         return;
       }
 
-const file = new Blob([text], {
+const blob = new Blob([urduText.value], {
         type: "text/plain;charset=utf-8"
       });
 
 const link = document.createElement("a");
-      link.href = URL.createObjectURL(file);
+      link.href = URL.createObjectURL(blob);
       link.download = "urdu-text.txt";
       link.click();
+      URL.revokeObjectURL(link.href);
+    }
 
-URL.revokeObjectURL(link.href);
+function clearText() {
+      urduText.value = "";
+      preview.textContent = "Aap ka Urdu text yahan nazar aayega...";
     }
   </script>
-
 </body>
 </html>
