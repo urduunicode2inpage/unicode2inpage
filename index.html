@@ -202,12 +202,40 @@ button {
     </section>
 
 <section class="card">
-      <label>Jameel/Nastaleeq Style Preview</label>
+  <label>Preview Font Select Karein</label>
+
+<select
+    id="fontSelector"
+    onchange="document.getElementById('preview').style.fontFamily = this.value"
+    style="width: 100%; padding: 12px; margin-bottom: 15px; border: 1px solid #b8c4d1; border-radius: 8px; font-size: 16px; background: white;"
+  >
+    <option value="'Noto Nastaliq Urdu', serif">
+      Noto Nastaliq Urdu
+    </option>
+
+<option value="'Jameel Noori Nastaleeq', 'Noto Nastaliq Urdu', serif">
+      Jameel Noori Nastaleeq
+    </option>
+
+<option value="Arial, sans-serif">
+      Arial
+    </option>
+
+<option value="Tahoma, sans-serif">
+      Tahoma
+    </option>
+
+<option value="Georgia, serif">
+      Georgia
+    </option>
+  </select>
+
+<label>Jameel/Nastaleeq Style Preview</label>
 
 <div id="preview" class="preview">
-        Aap ka Urdu text yahan nazar aayega...
-      </div>
-    </section>
+    Aap ka Urdu text yahan nazar aayega...
+  </div>
+</section>
 
 <section class="card">
       <label for="inpageOutput">Unicode se InPage Text</label>
